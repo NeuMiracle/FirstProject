@@ -4,12 +4,12 @@ import csv
 import numpy as np
 
 def PredictBySkSVM():
-    original_x,original_y = ld.GetTrainset(10000,10000)
+    original_x,original_y = ld.GetSvmTrainset(10000,10000)
     x = np.array(original_x)
     y = np.array(original_y)
     clf = svm.SVC()
     clf.fit(x, y)
-    needtest_key,needtest_data = ld.GetNeedtest()
+    needtest_key,needtest_data = ld.GetSvmNeedtest()
     f = open("result/sk_svm_result.csv", "wb")
     write = csv.writer(f)
     write.writerow(["user_id", "item_id"])

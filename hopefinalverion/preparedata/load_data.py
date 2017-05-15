@@ -76,3 +76,89 @@ def GetNeedtest():
         needtest_data.append(data)
     return needtest_key,needtest_data
 
+def GetSvmTrainset(p_num,n_num):
+    x = []
+    y = []
+    f1 = open("history/usercartnum_and_itemcartnum/traindata/trainset_p.csv")
+    trainset_p = csv.reader(f1)
+    trainset_p.next()
+    p_count = 0
+    for row in trainset_p:
+        p_count += 1
+        if p_count > p_num:
+            break
+        x_i = [float(row[2]),float(row[3])]
+        x.append(x_i)
+        y.append(1)
+    f1.close()
+
+    f2 = open("history/usercartnum_and_itemcartnum/traindata/trainset_n.csv")
+    trainset_n = csv.reader(f2)
+    trainset_n.next()
+    n_count = 0
+    for row in trainset_n:
+        n_count += 1
+        if n_count > n_num:
+            break
+        x_i = [float(row[2]), float(row[3])]
+        x.append(x_i)
+        y.append(-1)
+    f2.close()
+    return x,y
+
+def GetSvmNeedtest():
+    needtest_key = []
+    needtest_data = []
+    f = open("history/usercartnum_and_itemcartnum/needtestdata/needtest.csv")
+    needtest = csv.reader(f)
+    needtest.next()
+    for row in needtest:
+        key = [row[0],row[1]]
+        data = [float(row[2]),float(row[3])]
+        needtest_key.append(key)
+        needtest_data.append(data)
+    return needtest_key,needtest_data
+
+def GetBayesTrainset(p_num,n_num):
+    x = []
+    y = []
+    f1 = open("history/userratio_and_itemratio/traindata/trainset_p.csv")
+    trainset_p = csv.reader(f1)
+    trainset_p.next()
+    p_count = 0
+    for row in trainset_p:
+        p_count += 1
+        if p_count > p_num:
+            break
+        x_i = [float(row[2]),float(row[3])]
+        x.append(x_i)
+        y.append(1)
+    f1.close()
+
+    f2 = open("history/userratio_and_itemratio/traindata/trainset_n.csv")
+    trainset_n = csv.reader(f2)
+    trainset_n.next()
+    n_count = 0
+    for row in trainset_n:
+        n_count += 1
+        if n_count > n_num:
+            break
+        x_i = [float(row[2]), float(row[3])]
+        x.append(x_i)
+        y.append(-1)
+    f2.close()
+    return x,y
+
+def GetBayesNeedtest():
+    needtest_key = []
+    needtest_data = []
+    f = open("history/userratio_and_itemratio/needtestdata/needtest.csv")
+    needtest = csv.reader(f)
+    needtest.next()
+    for row in needtest:
+        key = [row[0],row[1]]
+        data = [float(row[2]),float(row[3])]
+        needtest_key.append(key)
+        needtest_data.append(data)
+    return needtest_key,needtest_data
+

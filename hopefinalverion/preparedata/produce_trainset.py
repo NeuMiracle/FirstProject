@@ -1,21 +1,21 @@
 import csv
 import os
 
-dict_user = {}
-dict_item = {}
+dict_feature1 = {}
+dict_feature2 = {}
 dict_abnormal = {}
 f1 = open("features/Ratio_cart_user.csv")
 userdata = csv.reader(f1)
 userdata.next()
 for row in userdata:
-    dict_user[row[0]] = float(row[1])
+    dict_feature1[row[0]] = float(row[1])
 f1.close()
 
 f2 = open("features/Ratio_cart_item.csv")
 itemdata = csv.reader(f2)
 itemdata.next()
 for row in itemdata:
-    dict_item[row[0]] = float(row[1])
+    dict_feature2[row[0]] = float(row[1])
 f2.close()
 
 f3 = open("data/abnormaldata/abnormal_user.csv")
@@ -46,13 +46,13 @@ def GetData(csvpath):
         if dict_buy.has_key(key):
             continue
         user_id, item_id = key
-        if not dict_user.has_key(user_id):
+        if not dict_feature1.has_key(user_id):
             continue
-        if not dict_item.has_key(item_id):
+        if not dict_feature2.has_key(item_id):
             continue
         if dict_abnormal.has_key(user_id):
             continue
-        dict_data[key] = [dict_user[user_id],dict_item[item_id]]
+        dict_data[key] = [dict_feature1[user_id],dict_feature2[item_id]]
     return dict_data
 
 def GetLabel(csvpath):
@@ -72,12 +72,12 @@ def GetLabel(csvpath):
 def ProduceTrainset():
     w_f1 = open("data/traindata/trainset_p.csv", 'wb')
     write1 = csv.writer(w_f1)
-    write1.writerow(["user_id", "item_id", "user_ratio", "item_ratio"])
+    write1.writerow(["user_id", "item_id", "feature1", "feature2"])
 
 
     w_f2 = open("data/traindata/trainset_n.csv", 'wb')
     write2 = csv.writer(w_f2)
-    write2.writerow(["user_id", "item_id", "user_ratio", "item_ratio"])
+    write2.writerow(["user_id", "item_id", "feature1", "feature2"])
 
 
     datecsvlist = os.listdir("data/datedata/")

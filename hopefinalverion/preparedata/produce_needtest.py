@@ -4,18 +4,18 @@ def ProduceNeedtest():
     dict_user = {}
     dict_item = {}
     dict_abnormal = {}
-    f1 = open("features/Ratio_cart_user.csv")
+    f1 = open("features/Basefeature_user.csv")
     userdata = csv.reader(f1)
     userdata.next()
     for row in userdata:
-        dict_user[row[0]] = float(row[1])
+        dict_user[row[0]] = float(row[3])
     f1.close()
 
-    f2 = open("features/Ratio_cart_item.csv")
+    f2 = open("features/Basefeature_item.csv")
     itemdata = csv.reader(f2)
     itemdata.next()
     for row in itemdata:
-        dict_item[row[0]] = float(row[1])
+        dict_item[row[0]] = float(row[3])
     f2.close()
 
     f3 = open("data/abnormaldata/abnormal_user.csv")
@@ -42,7 +42,7 @@ def ProduceNeedtest():
 
     w_f = open("data/needtestdata/needtest.csv", 'wb')
     write = csv.writer(w_f)
-    write.writerow(["user_id", "item_id", "user_ratio", "item_ratio"])
+    write.writerow(["user_id", "item_id", "feature1", "feature2"])
     for key in dict_cart:
         if dict_buy.has_key(key):
             continue

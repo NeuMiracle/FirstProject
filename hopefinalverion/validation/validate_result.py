@@ -123,10 +123,7 @@ def TestMyBayes():
 
 def TestAll():
     print "execute the TestAll"
-    print len(rule_predictset)
-    print len(sksvm_predictset)
-    print len(skbayes_predictset)
-    predictset = rule_predictset | ( sksvm_predictset & skbayes_predictset)
+    predictset = rule_predictset | (sksvm_predictset & skbayes_predictset & mysvm_predictset & mybayes_predictset)
     joinset = predictset & answerset
     j_num = len(joinset)
     a_num = len(answerset)

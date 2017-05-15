@@ -12,37 +12,23 @@ def TrainsetDistribution():
     y1 = []
     x2 = []
     y2 = []
-    num = 5000
-    list1 = []
     num1 = 0
     for data in traindate_p:
-        list1.append([float(data[0]), float(data[1])])
         num1 += 1
-        if num1 == num:
-            break
-    list1.sort(lambda x, y: cmp(x[0], y[0]))
-    list2 = []
+        x1.append(float(data[2]))
+        y1.append(float(data[3]))
     num2 = 0
     for data in traindate_n:
-        list2.append([float(data[0]), float(data[1])])
         num2 += 1
-        if num2 == num:
+        if num2 > num1:
             break
-    list2.sort(lambda x, y: cmp(x[0], y[0]))
-
-    for i in range(num):
-        x1.append(list1[i][0])
-        y1.append(list1[i][1])
-        x2.append(list2[i][0])
-        y2.append(list2[i][1])
-
-    plt.xlabel('ratio')
-    plt.ylabel('time')
+        x2.append(float(data[2]))
+        y2.append(float(data[3]))
+    plt.xlabel('feature1')
+    plt.ylabel('feature2')
     plt.title('trainset distribution')
     plt.scatter(x1, y1, c='r', marker='o',label='buy')
     plt.scatter(x2, y2, c='g', marker='o', label='not buy')
-    # plt.plot(x1, y1, label='buy')
-    # plt.plot(x2, y2, label='not buy')
     plt.legend()
     plt.savefig('picture/trainset_distribution.png')
     plt.show()

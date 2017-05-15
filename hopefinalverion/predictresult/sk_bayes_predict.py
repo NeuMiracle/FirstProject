@@ -4,11 +4,11 @@ import csv
 import numpy as np
 
 def PredictBySkBayes():
-    original_x,original_y = ld.GetTrainset(10000,10000)
+    original_x,original_y = ld.GetBayesTrainset(10000,10000)
     x = np.array(original_x)
     y = np.array(original_y)
     clf = GaussianNB().fit(x,y)
-    needtest_key,needtest_data = ld.GetNeedtest()
+    needtest_key,needtest_data = ld.GetBayesNeedtest()
     f = open("result/sk_bayes_result.csv", "wb")
     write = csv.writer(f)
     write.writerow(["user_id", "item_id"])
